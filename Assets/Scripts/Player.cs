@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    #region - Variables -
     [Header("Movement")]
     // private variables are with an underscore at the beginning
     [SerializeField] float _speed = 3.5f;
 
     [Header("Borders")]
-
     float _topBorder = 0.0f;
     float _bottomBorder = -3.8f;
     float _leftBorder = -9.5f;
     float _rightBorder = 9.5f;
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
