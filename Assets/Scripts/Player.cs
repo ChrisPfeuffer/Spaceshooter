@@ -25,15 +25,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        #region - Movement - 
+        Movement();
+    }
+
+    private void Movement()
+    {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0).normalized;
         transform.Translate(direction * _speed * Time.deltaTime);
-        #endregion
 
-        #region - Borders -
+        #region - Restriction -
         #region - Borders Top/Bottom -
         if (transform.position.y >= _topBorder)
         {
@@ -47,6 +50,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, _bottomBorder, _topBorder), transform.position.z);
         */
         #endregion
+
         #region - Borders Left/Right -
         if (transform.position.x > _rightBorder)
         {
