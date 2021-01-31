@@ -14,8 +14,15 @@ public class Player : MonoBehaviour
     float _bottomBorder = -3.8f;
     float _leftBorder = -9.5f;
     float _rightBorder = 9.5f;
-    #endregion
 
+
+    [Header("Laser")]
+    [SerializeField] GameObject _laserPrefab;
+    float _laserOffset = 0.8f;
+    [SerializeField] float _fireRate = 0.15f;
+    float _nextFire = 0.0f;
+
+    #endregion
     // Start is called before the first frame update
     void Start()
     {
@@ -25,10 +32,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movement();
+        CalculateMovement();
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)
+        {
+            FireLaser();
+        }
     }
 
-    private void Movement()
+
+    #region - External Methods -
+    private void CalculateMovement()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
@@ -36,8 +49,6 @@ public class Player : MonoBehaviour
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0).normalized;
         transform.Translate(direction * _speed * Time.deltaTime);
 
-        #region - Restriction -
-        #region - Borders Top/Bottom -
         if (transform.position.y >= _topBorder)
         {
             transform.position = new Vector3(transform.position.x, _topBorder, transform.position.z);
@@ -49,9 +60,7 @@ public class Player : MonoBehaviour
         /*Mathf.Clamp does the same
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, _bottomBorder, _topBorder), transform.position.z);
         */
-        #endregion
 
-        #region - Borders Left/Right -
         if (transform.position.x > _rightBorder)
         {
             transform.position = new Vector3(_leftBorder, transform.position.y, transform.position.z);
@@ -60,7 +69,13 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(_rightBorder, transform.position.y, transform.position.z);
         }
-        #endregion
-        #endregion
     }
+    private void FireLaser()
+    {
+        _nextFire = Time.time + _fireRate;
+        Instantiate(_laserPrefab, transform.position + (Vector3.up * _laserOffset), Quaternion.identity);
+    }
+
+
+    #endregion
 }
