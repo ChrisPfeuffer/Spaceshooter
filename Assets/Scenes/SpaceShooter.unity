@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 1582947953}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3.5
+  _lives: 3
   _laserPrefab: {fileID: 6459630421432333465, guid: bce0c341f1802944d8ca3fe7483fab31,
     type: 3}
   _fireRate: 0.1
@@ -249,7 +250,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582947952}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -427,12 +428,12 @@ PrefabInstance:
     - target: {fileID: 3543658258719325821, guid: a5ef3a1d4ec86fb40871e78654568250,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.02
       objectReference: {fileID: 0}
     - target: {fileID: 3543658258719325821, guid: a5ef3a1d4ec86fb40871e78654568250,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.3
       objectReference: {fileID: 0}
     - target: {fileID: 3543658258719325821, guid: a5ef3a1d4ec86fb40871e78654568250,
         type: 3}
