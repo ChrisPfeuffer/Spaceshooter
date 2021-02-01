@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    float _speed = 4.0f;
+    [SerializeField] float _speed = 4.0f;
     float _bottomBorder = -5.5f;
     float _topBorder = 5.5f;
+    float _minSpawnLeft = -8.5f;
     float _maxSpawnRight = 8.5f;
-    float _maxSpawnLeft = -8.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +22,30 @@ public class Enemy : MonoBehaviour
 
         if (transform.position.y <= _bottomBorder)
         {
-            this.transform.position = new Vector3(Random.Range(_maxSpawnLeft, _maxSpawnRight), _topBorder, 0);
+            float randomX = Random.Range(_minSpawnLeft, _maxSpawnRight);
+            this.transform.position = new Vector3(randomX, _topBorder, 0);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Player player = other.transform.GetComponent<Player>();
+
+            if (player != null)
+            {
+                player.Damage();
+            }
+
+            Destroy(this.gameObject);
+        }
+        
+        if (other.tag == "Laser")
+        {
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+
         }
     }
 }
