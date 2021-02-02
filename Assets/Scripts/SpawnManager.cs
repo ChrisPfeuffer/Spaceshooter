@@ -5,22 +5,28 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
 
+    #region - Variables -
+    [Header("GetComponents")]
     [SerializeField] GameObject _enemyPrefab;
     [SerializeField] GameObject _enemyContainer;
 
+
+    [Header("SetSpawning")]
     bool _stopSpawning = false;
-    // Start is called before the first frame update
+
+    #endregion
+    
     void Start()
     {
         StartCoroutine(SpawnRoutine());
     }
 
-    // Update is called once per frame
     void Update()
     {
 
     }
 
+    #region - External Methods -
     IEnumerator SpawnRoutine()
     {
         while (_stopSpawning == false)
@@ -36,4 +42,5 @@ public class SpawnManager : MonoBehaviour
     {
         _stopSpawning = true;
     }
+    #endregion
 }
