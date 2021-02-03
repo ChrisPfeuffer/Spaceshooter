@@ -14,10 +14,13 @@
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
 /[Aa]ssets/Thirdparty/
-/[Aa]ssets/Thirdparty.meta
+/[Aa]ssets/GameDevHQ/
+
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
+/[Aa]ssets/GameDevHQ.meta
+/[Aa]ssets/Thirdparty.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
