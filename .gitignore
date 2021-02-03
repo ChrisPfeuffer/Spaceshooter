@@ -14,6 +14,7 @@
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
 /[Aa]ssets/Thirdparty/
+/[Aa]ssets/Thirdparty.meta
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
