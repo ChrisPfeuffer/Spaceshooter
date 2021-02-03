@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
     [Header("LaserStats")]
     [SerializeField] GameObject _laserPrefab;
-    float _laserOffset = 0.8f;
+    float _laserOffset = 1f;
     [SerializeField] float _fireRate = 0.15f;
     float _nextFire = 0.0f;
 
