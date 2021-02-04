@@ -109,5 +109,17 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void TripleShotActive()
+    {
+        _isTripleShotActive = true;
+        StartCoroutine(TripleShotPowerRoutine());
+    }
+
+    IEnumerator TripleShotPowerRoutine()
+    {
+         yield return new WaitForSeconds(5.0f);
+        _isTripleShotActive = false;
+    }
+
     #endregion
 }
