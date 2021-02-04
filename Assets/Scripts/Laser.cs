@@ -17,10 +17,14 @@ public class Laser : MonoBehaviour
     #region - External Methods -
     private void CalculateMovement()
     {
-                transform.Translate(Vector3.up * _speed * Time.deltaTime);
+        transform.Translate(Vector3.up * _speed * Time.deltaTime);
 
         if (transform.position.y >= 6)
         {
+            if(transform.parent != null)
+            {
+                Destroy(transform.parent.gameObject);
+            }
             Destroy(this.gameObject);
         }
     }
