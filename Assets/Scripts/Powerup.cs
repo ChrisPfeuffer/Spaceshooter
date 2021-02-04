@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Powerup : MonoBehaviour
 {
+    #region - Variabels -
     [SerializeField] float _speed = 3.0f;
     float _bottomBorder = -6.5f;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+    #endregion
     void Update()
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
@@ -22,7 +17,7 @@ public class Powerup : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
+    #region - External -
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -35,4 +30,5 @@ public class Powerup : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    #endregion
 }

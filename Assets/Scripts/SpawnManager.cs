@@ -23,11 +23,6 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnPowerupRoutine());
     }
 
-    void Update()
-    {
-
-    }
-
     #region - External Methods -
     IEnumerator SpawnEnemyRoutine()
     {
@@ -39,6 +34,7 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(5.0f);
         }
     }
+
     IEnumerator SpawnPowerupRoutine()
     {
         while (_stopSpawning == false)
