@@ -17,7 +17,7 @@ public class Laser : MonoBehaviour
     #region - External Methods -
     private void CalculateMovement()
     {
-                transform.Translate(Vector3.up * _speed * Time.deltaTime);
+        transform.Translate(Vector3.up * _speed * Time.deltaTime);
 
         if (transform.position.y >= 6)
         {

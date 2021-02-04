@@ -6,7 +6,6 @@ public class Player : MonoBehaviour
 {
     #region - Variables -
     [Header("PlayerStats")]
-    // private variables are with an underscore at the beginning
     [SerializeField] float _speed = 3.5f;
     [SerializeField] float _lives = 3;
 
@@ -19,9 +18,15 @@ public class Player : MonoBehaviour
 
     [Header("LaserStats")]
     [SerializeField] GameObject _laserPrefab;
-    float _laserOffset = 1f;
     [SerializeField] float _fireRate = 0.15f;
+    float _laserOffset = 1f;
     float _nextFire = 0.0f;
+
+
+    [Header("TripleShot")]
+    [SerializeField] GameObject _tripleShotPrefab;
+    [SerializeField] bool _isTripleShotActive = false;
+
 
 
     SpawnManager _spawnManager;
@@ -82,7 +87,15 @@ public class Player : MonoBehaviour
     private void FireLaser()
     {
         _nextFire = Time.time + _fireRate;
-        Instantiate(_laserPrefab, transform.position + (Vector3.up * _laserOffset), Quaternion.identity);
+
+        if (_isTripleShotActive == true)
+        {
+            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+        }
+        else 
+        {
+            Instantiate(_laserPrefab, transform.position + (Vector3.up * _laserOffset), Quaternion.identity);
+        }
     }
 
     public void Damage()
