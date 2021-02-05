@@ -23,10 +23,12 @@ public class Player : MonoBehaviour
     float _nextFire = 0.0f;
 
 
-    [Header("TripleShot")]
+    [Header("Powerups")]
     [SerializeField] GameObject _tripleShotPrefab;
+    [SerializeField] GameObject _speedPowerupPrefab;
     [SerializeField] bool _isTripleShotActive = false;
-
+    [SerializeField] bool _isSpeedPowerupActive = false;
+    float _speedMultiplier = 2.0f;
 
 
     SpawnManager _spawnManager;
@@ -61,7 +63,15 @@ public class Player : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0).normalized;
-        transform.Translate(direction * _speed * Time.deltaTime);
+
+        if (_isSpeedPowerupActive == true)
+        {
+            transform.Translate(direction * (_speed * _speedMultiplier) * Time.deltaTime);
+        }
+        else 
+        {
+            transform.Translate(direction * _speed * Time.deltaTime);
+        }
 
         if (transform.position.y >= _topBorder)
         {
@@ -112,13 +122,25 @@ public class Player : MonoBehaviour
     public void TripleShotActive()
     {
         _isTripleShotActive = true;
-        StartCoroutine(TripleShotPowerRoutine());
+        StartCoroutine(TripleShotPowerupRoutine());
     }
 
-    IEnumerator TripleShotPowerRoutine()
+    IEnumerator TripleShotPowerupRoutine()
     {
          yield return new WaitForSeconds(5.0f);
         _isTripleShotActive = false;
+    }
+
+        public void SpeedPowerupActive()
+    {
+        _isSpeedPowerupActive = true;
+        StartCoroutine(SpeedPowerupRoutine());
+    }
+
+    IEnumerator SpeedPowerupRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isSpeedPowerupActive = false;
     }
 
     #endregion
