@@ -144,7 +144,7 @@ public class Player : MonoBehaviour
     }
 
 
-        public void SpeedPowerupActive()
+    public void SpeedPowerupActive()
     {
         _isSpeedPowerupActive = true;
         StartCoroutine(SpeedPowerupRoutine());
