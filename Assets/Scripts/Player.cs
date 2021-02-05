@@ -26,8 +26,13 @@ public class Player : MonoBehaviour
     [Header("Powerups")]
     [SerializeField] GameObject _tripleShotPrefab;
     [SerializeField] GameObject _speedPowerupPrefab;
+    [SerializeField] GameObject _shieldPowerupPrefab;
+    [SerializeField] GameObject _playerShieldVisualizer;
+
     [SerializeField] bool _isTripleShotActive = false;
     [SerializeField] bool _isSpeedPowerupActive = false;
+    [SerializeField] bool _isShieldPowerupActive = false;
+
     float _speedMultiplier = 2.0f;
 
 
@@ -110,6 +115,12 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
+        if(_isShieldPowerupActive)
+        {
+            _playerShieldVisualizer.SetActive(false);
+            _isShieldPowerupActive = false;
+            return;
+        }
         _lives -= 1;
 
         if (_lives < 1)
@@ -118,6 +129,7 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
 
     public void TripleShotActive()
     {
@@ -131,6 +143,7 @@ public class Player : MonoBehaviour
         _isTripleShotActive = false;
     }
 
+
         public void SpeedPowerupActive()
     {
         _isSpeedPowerupActive = true;
@@ -143,5 +156,11 @@ public class Player : MonoBehaviour
         _isSpeedPowerupActive = false;
     }
 
+
+    public void ShieldPowerupActive()
+    {
+        _playerShieldVisualizer.SetActive(true);
+        _isShieldPowerupActive = true;
+    }
     #endregion
 }
