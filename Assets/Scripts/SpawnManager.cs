@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject _enemyPrefab;
     [SerializeField] GameObject _enemyContainer;
     [SerializeField] GameObject _powerupContainer;
-    [SerializeField] GameObject _tripleShotPowerupPrefab;
+    [SerializeField] GameObject[] _powerups;
 
     [Header("SetSpawning")]
     bool _stopSpawning = false;
@@ -40,8 +40,9 @@ public class SpawnManager : MonoBehaviour
         while (_stopSpawning == false)
         {
         Vector3 posToSpawn = new Vector3(Random.Range(-8.5f, 8.5f), 5.5f, 0);
-        GameObject newTripleShotPowerup = Instantiate(_tripleShotPowerupPrefab, posToSpawn, Quaternion.identity);
-        newTripleShotPowerup.transform.parent = _powerupContainer.transform;
+        int randomPowerup = Random.Range(0, 2);
+        
+        Instantiate(_powerups[randomPowerup], posToSpawn, Quaternion.identity);
         yield return new WaitForSeconds(Random.Range(3.0f, 7.0f));
         }
     }
