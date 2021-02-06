@@ -6,8 +6,8 @@ public class Player : MonoBehaviour
 {
     #region - Variables -
     [Header("PlayerStats")]
-    [SerializeField] float _speed = 3.5f;
-    [SerializeField] float _lives = 3;
+    [SerializeField] float _speed = 5.0f;
+    [SerializeField] int _lives = 3;
 
     [Header("Borders")]
     float _topBorder = 0.0f;
@@ -35,18 +35,28 @@ public class Player : MonoBehaviour
 
     float _speedMultiplier = 2.0f;
 
-
     SpawnManager _spawnManager;
+
+    [Header("UI")]
+    UIManager _uiManager;
+    [SerializeField] int _score;
+
     #endregion
     // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
         if (_spawnManager == null)
         {
             Debug.LogError("The SpawnManager is null");
+        }
+
+        if (_uiManager == null)
+        {
+            Debug.LogError("The UIManager is null");
         }
     }
 
@@ -123,6 +133,8 @@ public class Player : MonoBehaviour
         }
         _lives -= 1;
 
+        _uiManager.UpdateLives(_lives);
+
         if (_lives < 1)
         {
             _spawnManager.OnPlayerDeath();
@@ -161,6 +173,12 @@ public class Player : MonoBehaviour
     {
         _playerShieldVisualizer.SetActive(true);
         _isShieldPowerupActive = true;
+    }
+
+    public void AddScore(int points)
+    {
+        _score += points;
+        _uiManager.UpdateScore(_score);
     }
     #endregion
 }

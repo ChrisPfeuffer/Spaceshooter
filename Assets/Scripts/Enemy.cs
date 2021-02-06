@@ -9,10 +9,12 @@ public class Enemy : MonoBehaviour
     float _topBorder = 5.5f;
     float _minSpawnLeft = -8.5f;
     float _maxSpawnRight = 8.5f;
+
+    private Player _player;
     // Start is called before the first frame update
     void Start()
     {
-        
+        _player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -44,8 +46,13 @@ public class Enemy : MonoBehaviour
         if (other.tag == "Laser")
         {
             Destroy(other.gameObject);
-            Destroy(this.gameObject);
 
+            if(_player != null)
+            {
+                _player.AddScore(10);
+            }
+
+            Destroy(this.gameObject);
         }
     }
 }
