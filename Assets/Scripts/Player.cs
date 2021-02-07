@@ -29,17 +29,20 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject _shieldPowerupPrefab;
     [SerializeField] GameObject _playerShieldVisualizer;
 
-    [SerializeField] bool _isTripleShotActive = false;
-    [SerializeField] bool _isSpeedPowerupActive = false;
-    [SerializeField] bool _isShieldPowerupActive = false;
-
+    bool _isTripleShotActive = false;
+    bool _isSpeedPowerupActive = false;
+    bool _isShieldPowerupActive = false;
     float _speedMultiplier = 2.0f;
+
 
     SpawnManager _spawnManager;
 
+    [Header ("DamageComponents")]
+    [SerializeField] GameObject[] _engineFailure;
+
     [Header("UI")]
-    UIManager _uiManager;
     [SerializeField] int _score;
+    UIManager _uiManager;
 
     #endregion
     // Start is called before the first frame update
@@ -57,6 +60,10 @@ public class Player : MonoBehaviour
         if (_uiManager == null)
         {
             Debug.LogError("The UIManager is null");
+        }
+        foreach(GameObject engine in _engineFailure)
+        {
+            engine.SetActive(false);
         }
     }
 
@@ -132,6 +139,16 @@ public class Player : MonoBehaviour
             return;
         }
         _lives -= 1;
+
+
+        if(_lives == 2)
+        {
+            _engineFailure[0].SetActive(true);
+        }
+        else if (_lives == 1)
+        {
+            _engineFailure[1].SetActive(true);
+        }
 
         _uiManager.UpdateLives(_lives);
 
