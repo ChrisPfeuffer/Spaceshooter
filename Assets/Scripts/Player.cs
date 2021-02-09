@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,13 +44,22 @@ public class Player : MonoBehaviour
     [SerializeField] int _score;
     UIManager _uiManager;
 
+    [Header("Audio")]
+    [SerializeField] AudioClip _laserAudioClip;
+    AudioSource _laserAudioSource;
+
+
+
     #endregion
-    // Start is called before the first frame update
+
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _laserAudioSource = GetComponent<AudioSource>();
+
+
 
         if (_spawnManager == null)
         {
@@ -64,6 +73,15 @@ public class Player : MonoBehaviour
         foreach(GameObject engine in _engineFailure)
         {
             engine.SetActive(false);
+        }
+
+        if(_laserAudioSource == null)
+        {
+            Debug.Log("AudioSource on the player is null");
+        }
+        else
+        {
+            _laserAudioSource.clip = _laserAudioClip;
         }
     }
 
@@ -128,6 +146,8 @@ public class Player : MonoBehaviour
         {
             Instantiate(_laserPrefab, transform.position + (Vector3.up * _laserOffset), Quaternion.identity);
         }
+
+        _laserAudioSource.Play();
     }
 
     public void Damage()
